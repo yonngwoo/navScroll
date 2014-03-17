@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>navScroll</title>
+	<link href="main.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="navScroll.js?ver=1.1.0"></script>
+</head>
+<body>
+	<ul class="navigation clearfix" id="navigation">
+		<li><a href="#box-1" class="current">Box-1</a></li>
+		<li><a href="#box-2">Box-2</a></li>
+		<li><a href="#box-3">Box-3</a></li>
+		<li><a href="#box-4">Box-4</a></li>
+		<li><a href="#box-5">Box-5</a></li>
+	</ul>
+	<ul class="map clearfix" id="map">
+		<li><a href="#box-1" class="current">Box-1</a></li>
+		<li><a href="#box-2">Box-2</a></li>
+		<li><a href="#box-3">Box-3</a></li>
+		<li><a href="#box-4">Box-4</a></li>
+		<li><a href="#box-5">Box-5</a></li>
+	</ul>
+	<div class="wrap" id="wrap">
+		<h1><small>By <a href="http://webjyh.com" target="_blank">M.J</a></small>navScroll 滚动到指定容器</h1>
+		
+		<h3 class="code-title">更新说明</h3>
+		<pre>=== V1.1.0 ===
+<span>*</span> 增加scroll事件，根据 scroll 在 box 的位置给 nav 添加 class，
+<span>*</span> 调用方法改动
+		</pre>
+		
+		<h3 class="code-title">Demo参考 点击上方或者右方的导航</h3>
+
+		<h3 class="text">navScroll 该如何使用呢？</h3>
+		<h3 class="code-title">头部引用JS文件 (不需要任何JS库，直接引用即可)</h3>
+		<pre>&lt;script type="text/javascript" src="navScroll.js"&gt;&lt;/script&gt;</pre>
+		
+		<h3 class="code-title">初始化导航HTML  (<span>结构必须为这样 大家直接Copy吧</span>)</h3>
+		<pre>
+&lt;ul class="navigation clearfix" id="navigation"&gt;
+	&lt;li&gt;&lt;a href="<span>#box-1</span>" <span>class="current"</span>&gt;home&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="<span>#box-2</span>"&gt;categories&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="<span>#box-3</span>"&gt;about&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="<span>#box-4</span>"&gt;full Width Page&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="<span>#box-5</span>"&gt;Most Loved Posts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+		</pre>
+		<h3 class="code-title">
+			PS: <span style="font-weight:normal"><br />HTML 结构中的 <strong>a</strong> 链接中 <strong>href</strong> 的值就是你所对应要跳转到 Box 的位置，这跟锚点的做法一样。<br /></span>
+			例如：<span style="font-weight:normal"><br />href="#box-1" 值为 #box-1 则 对应的 Box就是 &lt;div id="box-1"&gt;&lt;/div&gt;<br />
+			点击之后 会跳转到 id为Box-1的位置。<br />
+			</span>
+		</h3>
+		
+		<h3 class="code-title">附带功能：调整布局 </h3>
+		<h3 class="code-title">
+			说明: <span style="font-weight:normal"><br />此功能是用于当窗口宽度小于容器宽度，内容居中显示。只适合最外成容器ID。<br /></span>
+			例如：<span style="font-weight:normal"><br />外容器 id="wrap-main" 宽度定义为 1200px 当窗口小于1200 内容会以中间显示，裁剪两边的，有点类似于 CSS 中 margin:0px auto;效果 <br />
+			在设置此效果时，需要将 body 设置以下CSS body { overflow-x:hidden; } 才会有效果
+			</span>
+		</h3>
+
+		<h3 class="code-title">初始化JS</h3>
+		<pre>
+&lt;script type="text/javascript"&gt;
+new navScroll({
+    resizeWrap : {           //调整布局功能，不需要此功能，此代码块可以删除
+        wrap : 'wrap',       //外容器ID
+        maxWidth : 600       //窗口小于多少PX调整布局，不需要此功能，参数可以删除
+    },
+    nav : {                  //导航跳转功能，不需要可以删除此代码块
+        id : 'navigation',   //点击跳转到容器的导航ID 请把 ID 设置给 UL 
+        current : 'current', //默认点击A链接后，默认样式名
+        speed : 25,          //动画执行速度，越小则越快。反之，越慢。
+        fixPx :40            //在导航使用绝对定位且在窗口上方，容器与导航的差,默认为0
+    }
+});
+&lt;script&gt;
+		</pre>
+		
+		<h3 class="code-title">导航参数 fixPx </h3>
+		<h3 class="code-title">
+			说明: <span style="font-weight:normal"><br />此功能是用于在导航使用绝对定位且在窗口上方，导致点击Box后，Box到达位置后，容器头部的内容被导航遮挡。所以添加此参数。默认参数为0。<br /></span>
+			例如：<span style="font-weight:normal"><br />此参数添写多少合适呢，就是填写你导航容器的高度，这样Box到达位置后，不会被导航遮住。 <br />
+			因 IE 6下 position:fixed; 有问题，所以此功能在IE6下有可能会产生错位。
+			</span>
+		</h3>
+		
+		<a href="navScroll.zip" class="download">下载 navScroll.zip</a>
+		
+		<div class="box" id="box-1">Box-1</div>
+		<div class="box" id="box-2">Box-2</div>
+		<div class="box" id="box-3">Box-3</div>
+		<div class="box" id="box-4">Box-4</div>
+		<div class="box" id="box-5">Box-5</div>
+
+		
+		
+	</div>
+	
+	<script type="text/javascript">
+	var navigation = new navScroll({
+		resizeWrap : {
+			wrap : 'wrap',
+			maxWidth : 600
+		},
+		nav : {
+			id : 'navigation',
+			current : 'current',
+			speed : 25,
+			fixPx :40
+		}
+	});
+	var map = new navScroll({
+		nav : {
+			id : 'map',
+			current : 'current',
+			speed : 25,
+			fixPx : 40
+		}
+	});
+	
+	//以下JS跟navScroll无关
+	function setMap(){
+		var _wrap = document.getElementById('wrap');
+		document.getElementById('map').style.left = _wrap.offsetLeft + _wrap.offsetWidth + 20 + 'px';
+	}
+	setMap();
+	window.onresize = function(){ setMap(); }
+	</script>
+</body>
+</html>
