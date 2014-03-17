@@ -19,7 +19,6 @@ navScroll
 </pre>
 
 <h4>初始化导航HTML (结构必须为这样 大家直接Copy吧)</h4>
-<p>初始化导航HTML (结构必须为这样 大家直接Copy吧)</p>
 <pre>
 &lt;ul class="navigation clearfix" id="navigation"&gt;
 	&lt;li&gt;&lt;a href="#box-1" class="current"&gt;home&lt;/a&gt;&lt;/li&gt;
