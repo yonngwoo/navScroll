@@ -15,7 +15,7 @@ navScroll
 <h4>navScroll 该如何使用呢？</h4>
 <p>头部引用JS文件 (不需要任何JS库，直接引用即可)</p>
 <pre>
-<script type="text/javascript" src="navScroll.js"></script>
+&lt;script type="text/javascript" src="navScroll.js"&gt;&lt;/script&gt;
 </pre>
 
 <h4>初始化导航HTML (结构必须为这样 大家直接Copy吧)</h4>
