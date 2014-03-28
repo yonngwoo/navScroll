@@ -5,6 +5,12 @@ navScroll
 <p><strong>Demo 预览：</strong>http://demo.webjyh.com/navScroll/</p>
 
 <blockquote>
+	<p>=== V1.2.0 ===</p>
+	<ul>
+		<li>1.修正某个导航不需要 navScroll 功能。</li>
+		<li>2.如本页中 导航中的 M.J 一样。链接功能依旧保持。</li>
+	</ul>
+	
 	<p>=== V1.1.0 ===</p>
 	<ul>
 		<li>1.增加scroll事件，根据 scroll 在 box 的位置给 nav 添加 class</li>
