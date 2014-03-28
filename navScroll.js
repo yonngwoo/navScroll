@@ -21,7 +21,8 @@
  * @URL           http://webjyh.com
  * @Demo          http://demo.webjyh.com/navScroll/
  * @Time          2014/03/07
- * @Ver           1.1.0
+ * @Update        2014/03/28
+ * @Ver           1.2.0
 */
 (function(){
 	var navScroll = function( params ){
@@ -59,21 +60,24 @@
 			    offsetTop = [];
 			for ( var i=0; i<li.length; i++ ){
 				li[i].index = i;
-				li[i].idName = re.exec( li[i].getElementsByTagName('a')[0].href )[1];
+				var reg = re.exec( li[i].getElementsByTagName('a')[0].href );
+				li[i].idName = reg ? reg[1] : null;
 				var box = [
 					li[i].index,
-					document.getElementById( li[i].idName ).offsetTop - _this.fixPx,
-					(document.getElementById( li[i].idName ).offsetTop - _this.fixPx) + document.getElementById( li[i].idName ).offsetHeight
+					li[i].idName ? ( document.getElementById( li[i].idName ).offsetTop - _this.fixPx ) : null,
+					li[i].idName ? (document.getElementById( li[i].idName ).offsetTop - _this.fixPx) + document.getElementById( li[i].idName ).clientHeight : null
 				];
 				offsetTop.push( box );
 				li[i].onclick = function(){
-					var top = document.getElementById( li[this.index].idName ).offsetTop - _this.fixPx,
-					    b = _this.getScrollPos(),
-					    c = ( top - _this.getScrollPos() ),
-					    d= speed ,
-					    t=0;
-					_this.animate( t, b, c, d );
-					return false;
+					if ( li[this.index].idName ){
+						var top = document.getElementById( li[this.index].idName ).offsetTop - _this.fixPx ,
+							b = _this.getScrollPos(),
+							c = ( top - _this.getScrollPos() ),
+							d= speed ,
+							t=0;
+						_this.animate( t, b, c, d );
+						return false;
+					}
 				}
 			}
 			_this.addEventCheck( window, 'scroll', function(){ _this.scroll( li, offsetTop ); } );
@@ -82,10 +86,12 @@
 			var _this = this,
 			    scroll = _this.getScrollPos();
 			for ( var i=0; i<arr.length; i++ ){
-				if ( scroll >= arr[i][1] && scroll <= arr[i][2] ){
-					_this.classReset( obj );
-					obj[arr[i][0]].getElementsByTagName('a')[0].className = _this.current;
-				} 
+				if ( arr[i][1] && arr[i][2] ){
+					if ( scroll >= arr[i][1] && scroll <= arr[i][2] ){
+						_this.classReset( obj );
+						obj[arr[i][0]].getElementsByTagName('a')[0].className = _this.current;
+					}
+				}
 			}
 		},
 		getScrollPos : function(){
