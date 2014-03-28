@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>navScroll</title>
+	
+	<!--Code Hight CSS-->
+	<link rel="stylesheet" href="assets/css/shCore.css" />
+	<link rel="stylesheet" href="assets/css/shThemeDefault.css" />
+	
+	<!--Demo CSS-->
+	<link rel="stylesheet" href="assets/css/demo.css" />
+	
+	<!--navScroll JS-->
+	<script type="text/javascript" src="navScroll.js?ver=1.2.0"></script>
+</head>
+<body>
+
+	<!--navScroll Style-->
+	<style type="text/css">
+	.navigation { position:fixed; top:0px; left:0px; width:100%; background:#333; padding:5px 0px 5px 20px; box-shadow:0px 3px 5px rgba(0, 0, 0, 0.5); z-index:20; }
+	.navigation li { float:left; position:relative; z-index:99; padding:0px 5px; height:30px; line-height:30px; }
+	.navigation li a { color:#FFF; padding:0px 15px; display:inline-block; zoom:1; font-family:'Oswald',"Microsoft Yahei",sans-serif; font-size:14px; text-transform:capitalize; transition: all 0.2s linear; text-decoration:none; } 
+	.navigation li a:hover, .navigation li a.current { background:#FFF;  color:#000; }
+
+	.map { position:fixed; top:20%; right:20px; width:100px; background:#FFF; text-align:center; box-shadow:0px 0px 5px rgba(0,0,0,0.3); z-index:20; padding:5px 0px; }
+	.map li { height:30px; line-height:30px; border-bottom:1px solid #DDD; }
+	.map li a { color:#666; display:block; width:100%; height:100%; font-family:'Oswald',"Microsoft Yahei",sans-serif; text-transform:capitalize; transition: all 0.2s linear; text-decoration:none; }
+	.map li a:hover, .map li a.current { background:#67a8ab;  color:#FFF; }
+
+	.box { width:600px; height:600px; margin:20px 0px; font-size:20px; }
+	#box-1 { color:#FFF; background-color:#000; }
+	#box-2 { color:#000; background-color:yellow; }
+	#box-3 { color:#FFF; background-color:blue; }
+	#box-4 { color:#000; background-color:#10FA9C; }
+	#box-5 { color:#FFF; background-color:red; }
+	</style>
+
+	<!--navScroll HTML-->
+	<ul class="navigation clearfix" id="navigation">
+		<li><a href="#box-1" class="current">Box-1</a></li>
+		<li><a href="#box-2">Box-2</a></li>
+		<li><a href="#box-3">Box-3</a></li>
+		<li><a href="http://webjyh.com">M.J</a></li>
+		<li><a href="#box-4">Box-4</a></li>
+		<li><a href="#box-5">Box-5</a></li>
+	</ul>
+	<ul class="map clearfix" id="map">
+		<li><a href="#box-1" class="current">Box-1</a></li>
+		<li><a href="#box-2">Box-2</a></li>
+		<li><a href="#box-3">Box-3</a></li>
+		<li><a href="http://webjyh.com">M.J</a></li>
+		<li><a href="#box-4">Box-4</a></li>
+		<li><a href="#box-5">Box-5</a></li>
+	</ul>
+	
+
+	<h1 style="padding-top:50px;">navScroll Demo <a href="https://github.com/webjyh/navScroll" target="_blank">#View Github</a> <a style="font-size:12px;" target="_blank" href="http://webjyh.com/navScroll/">By M.J</a></h1>
+	<hr />
+	
+	<div class="wrapper" style="padding-bottom:300px;">
+		
+		<h3>使用 navScroll</h3>
+		<p>navScroll 是一个点击导航滚动到指定容器，本插件由原生JavaScript所编写，不需要任何JS库。</p>
+		
+		<!--Example Update-->
+		<div class="example_box">
+			<h3>更新说明</h3>
+			<div class="code_box">
+				<pre class="brush: php;html-script:true;">
+					=== V1.2.0 ===
+					1.修正某个导航不需要 navScroll 功能。
+					2.如本页中 导航中的 M.J 一样。链接功能依旧保持。
+					
+					=== V1.1.0 ===
+					1.增加scroll事件，根据 scroll 在 box 的位置给 nav 添加 class，
+					2.调用方法改动</pre>
+			</div>
+		</div>
+		
+		<!--Example One-->
+		<div class="example_box">
+			<h3>1.引用JS</h3>
+			<div class="code_box">
+				<pre class="brush: php;html-script:true;">&lt;script type="text/javascript" src="navScroll.js"&gt;&lt;/script&gt;</pre>
+			</div>
+			
+			<h3>2.增加HTML</h3>
+			<div class="code_box">
+				<pre class="brush: php;html-script:true;">
+					&lt;ul class="navigation clearfix" id="navigation"&gt;
+						&lt;li&gt;&lt;a href="#box-1" class="current"&gt;Box-1&lt;/a&gt;&lt;/li&gt;
+						&lt;li&gt;&lt;a href="#box-2"&gt;Box-2&lt;/a&gt;&lt;/li&gt;
+						&lt;li&gt;&lt;a href="#box-3"&gt;Box-3&lt;/a&gt;&lt;/li&gt;
+						&lt;li&gt;&lt;a href="http://webjyh.com"&gt;M.J&lt;/a&gt;&lt;/li&gt;
+						&lt;li&gt;&lt;a href="#box-4"&gt;Box-4&lt;/a&gt;&lt;/li&gt;
+						&lt;li&gt;&lt;a href="#box-5"&gt;Box-5&lt;/a&gt;&lt;/li&gt;
+					&lt;/ul&gt;</pre>
+			</div>
+			<p><strong>PS：</strong>HTML 结构中的 <strong>a</strong> 链接中 <strong>href</strong> 的值就是你所对应要跳转到 Box 的位置，这跟锚点的做法一样。</p>
+			<p><strong>例如：</strong>href="#box-1" 值为 #box-1 则 对应的 Box就是 &lt;div id="box-1"&gt;&lt;/div&gt; 点击之后 会跳转到 id为Box-1的位置。</p>
+
+			<h3>3.增加JS</h3>
+			<div class="code_box">
+				<pre class="brush: js;">
+					new navScroll({
+						nav : {                  //导航跳转功能，不需要可以删除此代码块
+							id : 'navigation',   //点击跳转到容器的导航ID 请把 ID 设置给 UL 
+							current : 'current', //默认点击A链接后，默认样式名
+							speed : 25,          //动画执行速度，越小则越快。反之，越慢。
+							fixPx :40            //在导航使用绝对定位且在窗口上方，容器与导航的差,默认为0
+						}
+					});</pre>
+			</div>
+		</div>
+
+		<!--Example Two-->
+		<div class="example_box">
+			<h3><span style="color:#00F;">Expand：</span>扩展功能 调整布局</h3>
+			<p><strong>说明：</strong>此功能是用于当窗口宽度小于容器宽度，内容居中显示。只适合最外成容器ID。</p>
+			<p><strong>例如：</strong>外容器 id="wrap-main" 宽度定义为 1200px 当窗口小于1200 内容会以中间显示，裁剪两边的，有点类似于 CSS 中 margin:0px auto;效果。在设置此效果时，需要将 body 设置以下CSS body { overflow-x:hidden; } </p>
+			<h3>调用扩展</h3>
+			<div class="code_box">
+				<pre class="brush: js;">
+					new navScroll({
+						resizeWrap : {           //调整布局功能，不需要此功能，此代码块可以删除
+							wrap : 'wrap',       //外容器ID
+							maxWidth : 600       //窗口小于多少PX调整布局，不需要此功能，参数可以删除
+						},
+						nav : {                  //导航跳转功能，不需要可以删除此代码块
+							id : 'navigation',   //点击跳转到容器的导航ID 请把 ID 设置给 UL 
+							current : 'current', //默认点击A链接后，默认样式名
+							speed : 25,          //动画执行速度，越小则越快。反之，越慢。
+							fixPx :40            //在导航使用绝对定位且在窗口上方，容器与导航的差,默认为0
+						}
+					});</pre>
+			</div>
+		</div>
+		
+		<!--Example Three-->
+		<div class="example_box">
+			<h3><span style="color:#00F;">Expand：</span>导航参数 fixPx</h3>
+			<p><strong>说明：</strong>此功能是用于在导航使用绝对定位且在窗口上方，导致点击Box后，Box到达位置后，容器头部的内容被导航遮挡。所以添加此参数。默认参数为0。</p>
+			<p><strong>例如：</strong>此参数添写多少合适呢，就是填写你导航容器的高度，这样Box到达位置后，不会被导航遮住。因 IE 6下 position:fixed; 有问题，所以此功能在IE6下有可能会产生错位。</p>
+		</div>
+		
+		<!--Example Four-->
+		<p style="padding-top:20px;"><a href="navScroll.zip" style="padding:5px 10px;" class="btn">下载 navScroll.zip<a></p>
+		<br /><br />
+		
+		<!-- Box -->
+		<div class="box" id="box-1">Box-1</div>
+		<div class="box" id="box-2">Box-2</div>
+		<div class="box" id="box-3">Box-3</div>
+		<div class="box" id="box-4">Box-4</div>
+		<div class="box" id="box-5">Box-5</div>
+		
+	</div>
+
+	<!--Code Hight-->
+	<script type="text/javascript" src="assets/js/shCore.js"></script>
+	<script type="text/javascript" src="assets/js/shBrushXml.js"></script>
+	<script type="text/javascript" src="assets/js/shBrushPhp.js"></script>
+	<script type="text/javascript" src="assets/js/shbrushjscript.js"></script>
+	<script type="text/javascript" src="assets/js/shbrushcss.js"></script>
+	<script type="text/javascript">
+		/**
+		 * 这里的代码高亮 callback 方法，是本人自己添加到 SyntaxHighlighter 里的，
+		 * 为什么这里我要用 CallBack 因为当使用代码高亮的时候，加载代码的时候
+		 * SyntaxHighlighter 会使代码重新排版一次，更为紧凑。
+		 * 如果是同时初始化插件，则会导致插件在获取 Scroll 会产生像素偏差，
+		 * 所以我就加了这个CallBack方法，在当代码高亮加载完，在加载本插件。
+		 * 这只是在本页面需要这样做，在正常使用时，就不用这样了。
+		 * 只要按照 Demo的方法正常使用即可，如果你也使用了 SyntaxHighlighter
+		 * 建议像我一样的操作方法
+		*/
+		SyntaxHighlighter.callback = function(){
+			var navigation = new navScroll({
+				nav : {
+					id : 'navigation',
+					current : 'current',
+					speed : 25,
+					fixPx : 40
+				}
+			});
+			var map = new navScroll({
+				nav : {
+					id : 'map',
+					current : 'current',
+					speed : 25,
+					fixPx : 40
+				}
+			});
+		}
+		SyntaxHighlighter.all();
+	</script>
+</body>
+</html>
